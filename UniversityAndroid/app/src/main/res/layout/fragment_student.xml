@@ -1,0 +1,145 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.univ.hesiris.universityandroid.StudentFragment">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="Student Page"
+        android:id="@+id/containerStudentPage" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/student_name_first"
+        android:id="@+id/textViewStudentNameFirst"
+        android:layout_gravity="left|center_vertical"
+        android:layout_above="@+id/editTextLastName"
+        android:layout_alignLeft="@+id/textViewLastName"
+        android:layout_alignStart="@+id/textViewLastName"
+        android:layout_marginBottom="28dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/student_name_last"
+        android:id="@+id/textViewLastName"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:layout_above="@+id/editTextYear"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="27dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/student_year"
+        android:id="@+id/textViewYear"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/textViewLastName"
+        android:layout_alignStart="@+id/textViewLastName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextFirstName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZșȘțȚăĂîÎâÂéÉáÁőŐúÚűŰöÖüÜóÓ"
+        android:layout_marginLeft="34dp"
+        android:layout_marginStart="34dp"
+        android:layout_alignBottom="@+id/textViewStudentNameFirst"
+        android:layout_toRightOf="@+id/textViewStudentNameFirst"
+        android:layout_toEndOf="@+id/textViewStudentNameFirst" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:ems="10"
+        android:id="@+id/editTextLastName"
+        android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZșȘțȚăĂîÎâÂéÉáÁőŐúÚűŰöÖüÜóÓ"
+        android:layout_alignBottom="@+id/textViewLastName"
+        android:layout_alignLeft="@+id/editTextFirstName"
+        android:layout_alignStart="@+id/editTextFirstName" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:maxLength="1"
+        android:id="@+id/editTextYear"
+        android:layout_alignBottom="@+id/textViewYear"
+        android:layout_alignLeft="@+id/editTextLastName"
+        android:layout_alignStart="@+id/editTextLastName" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/insertStudent"
+        android:id="@+id/buttonInsert"
+        android:layout_marginTop="76dp"
+        android:layout_below="@+id/editTextYear"
+        android:layout_alignRight="@+id/editTextYear"
+        android:layout_alignEnd="@+id/editTextYear" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="ID"
+        android:id="@+id/textViewId"
+        android:layout_above="@+id/editTextFirstName"
+        android:layout_alignLeft="@+id/textViewStudentNameFirst"
+        android:layout_alignStart="@+id/textViewStudentNameFirst"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Search"
+        android:id="@+id/buttonSearch"
+        android:layout_alignBottom="@+id/buttonInsert"
+        android:layout_alignLeft="@+id/textViewYear"
+        android:layout_alignStart="@+id/textViewYear" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Edit"
+        android:enabled="false"
+        android:clickable="false"
+        android:id="@+id/buttonEdit"
+        android:layout_alignTop="@+id/buttonInsert"
+        android:layout_alignLeft="@+id/editTextYear"
+        android:layout_alignStart="@+id/editTextYear" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove"
+        android:enabled="false"
+        android:clickable="false"
+        android:id="@+id/buttonRemove"
+        android:layout_below="@+id/buttonEdit"
+        android:layout_alignLeft="@+id/buttonEdit"
+        android:layout_alignStart="@+id/buttonEdit"
+        android:layout_marginTop="34dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/textViewIDValue"
+        android:layout_alignBottom="@+id/textViewId"
+        android:layout_alignLeft="@+id/editTextFirstName"
+        android:layout_alignStart="@+id/editTextFirstName" />
+
+</RelativeLayout>
