@@ -10,4 +10,8 @@
     <string name="student_year">Year</string>
     <string name="insertStudent">Insert</string>
     <string name="title_activity_search_student">SearchStudentActivity</string>
+    <string name="departament">Department</string>
+    <string name="designation">Designation</string>
+    <string name="taught_by">Taught By</string>
+    <string name="credits">Credits</string>
 </resources>

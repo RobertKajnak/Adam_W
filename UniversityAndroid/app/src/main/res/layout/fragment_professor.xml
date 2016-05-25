@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.univ.hesiris.universityandroid.StudentFragment">
+    tools:context=".ProfessorFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Student Page"
-        android:id="@+id/containerStudentPage" />
+        android:text="Professor Page" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/student_year"
+        android:text="@string/departament"
         android:id="@+id/textViewDepartment"
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/textViewLastName"
@@ -72,13 +72,12 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:maxLength="1"
         android:id="@+id/editTextYear"
         android:layout_alignBottom="@+id/textViewDepartment"
         android:layout_alignLeft="@+id/editTextLastName"
-        android:layout_alignStart="@+id/editTextLastName" />
+        android:layout_alignStart="@+id/editTextLastName"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
 
     <Button
         android:layout_width="wrap_content"
@@ -141,5 +140,25 @@
         android:layout_alignBottom="@+id/textViewId"
         android:layout_alignLeft="@+id/editTextFirstName"
         android:layout_alignStart="@+id/editTextFirstName" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Office"
+        android:id="@+id/textViewOffice"
+        android:layout_above="@+id/buttonSearch"
+        android:layout_alignLeft="@+id/buttonSearch"
+        android:layout_alignStart="@+id/buttonSearch"
+        android:layout_marginBottom="26dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/editText"
+        android:layout_alignBottom="@+id/textViewOffice"
+        android:layout_toRightOf="@+id/textViewIDValue"
+        android:layout_alignRight="@+id/editTextLastName"
+        android:layout_alignEnd="@+id/editTextLastName" />
 
 </RelativeLayout>

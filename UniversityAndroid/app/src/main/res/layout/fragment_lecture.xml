@@ -2,19 +2,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.univ.hesiris.universityandroid.StudentFragment">
+    tools:context=".LectureFragment">
 
+    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Student Page"
-        android:id="@+id/containerStudentPage" />
+        android:text="Lecture Page" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/student_name_first"
+        android:text="@string/designation"
         android:id="@+id/textViewStudentNameFirst"
         android:layout_gravity="left|center_vertical"
         android:layout_above="@+id/editTextLastName"
@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/student_name_last"
+        android:text="@string/taught_by"
         android:id="@+id/textViewLastName"
         android:layout_marginLeft="28dp"
         android:layout_marginStart="28dp"
@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/student_year"
+        android:text="@string/credits"
         android:id="@+id/textViewDepartment"
         android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/textViewLastName"
@@ -141,5 +141,4 @@
         android:layout_alignBottom="@+id/textViewId"
         android:layout_alignLeft="@+id/editTextFirstName"
         android:layout_alignStart="@+id/editTextFirstName" />
-
 </RelativeLayout>

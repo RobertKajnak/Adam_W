@@ -1,7 +1,5 @@
 package com.univ.hesiris.universityandroid;
 
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -17,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -143,16 +140,23 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            if (position==0)
-                return new StudentFragment();
-            else
-                return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return new StudentFragment();
+                case 1:
+                    return new ProfessorFragment();
+                case 2:
+                    return new LectureFragment();
+                default:
+                    return PlaceholderFragment.newInstance(position + 1);
+
+            }
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 2;
+            return 3;
         }
 
         @Override
