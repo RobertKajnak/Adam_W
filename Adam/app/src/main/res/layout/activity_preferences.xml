@@ -13,7 +13,6 @@
 
         android:fillViewport="true"
         android:layout_gravity="center"
-        android:background="@android:color/holo_red_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,6 +67,7 @@
                 android:id="@+id/datePicker"
                 android:layout_width="352dp"
                 android:layout_height="398dp"
+                android:layout_marginTop="30dp"
                 android:layout_gravity="center_vertical"
                 android:visibility="gone" />
 
@@ -76,10 +76,13 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
                 android:id="@+id/listview_checkboxes"
+                android:layout_marginTop="30dp"
                 android:visibility="gone"
                 android:orientation="vertical">
 
                 <CheckBox
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:id="@+id/checkbox_mus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -87,6 +90,8 @@
                     android:text="Arts/Museums" />
 
                 <CheckBox
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:id="@+id/checkbox_park"
                     android:layout_width="match_parent"
                     android:onClick="onCheckboxTicked"
@@ -94,18 +99,24 @@
                     android:text="Outdoor/Park" />
 
                 <CheckBox
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:id="@+id/checkbox_cafe"
                     android:layout_width="match_parent"
                     android:onClick="onCheckboxTicked"
                     android:layout_height="wrap_content"
                     android:text="Cosy/Café" />
                 <CheckBox
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:id="@+id/checkbox_old"
                     android:layout_width="match_parent"
                     android:onClick="onCheckboxTicked"
                     android:layout_height="wrap_content"
                     android:text="Historic/Old" />
                 <CheckBox
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:id="@+id/checkbox_uniq"
                     android:layout_width="match_parent"
                     android:onClick="onCheckboxTicked"
@@ -114,6 +125,7 @@
             </LinearLayout>
 
             <Button
+                android:layout_marginTop="30dp"
                 android:id="@+id/button_confirm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
