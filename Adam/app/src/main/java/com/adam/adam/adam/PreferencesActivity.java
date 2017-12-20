@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -78,7 +79,7 @@ public class PreferencesActivity extends AppCompatActivity {
                 prefs.usertype = mRadioGuide.isChecked()?1:0;
                 if (prefs.usertype == 0){
                     Date date1= (Date) new Date
-                        (mDatePicker.getYear(), mDatePicker.getMonth(), mDatePicker.getDayOfMonth());
+                        (mDatePicker.getYear()-1900, mDatePicker.getMonth(), mDatePicker.getDayOfMonth());
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                     String dateString = sdf.format(date1);
                     prefs.date = dateString;

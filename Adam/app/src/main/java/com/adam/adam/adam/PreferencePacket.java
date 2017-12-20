@@ -55,7 +55,7 @@ public class PreferencePacket {
             }
             prefJSON.put("likes",jsonArr);
         } catch (JSONException e) {
-            Log.e("JSON","Failed toparse",e);
+            Log.e("JSON","Failed to parse",e);
         }
 
         return prefJSON.toString();
