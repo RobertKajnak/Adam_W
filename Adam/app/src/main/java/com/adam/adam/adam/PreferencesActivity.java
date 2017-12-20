@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.facebook.AccessToken;
 
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
@@ -25,6 +26,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.SocketException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -41,6 +43,7 @@ public class PreferencesActivity extends AppCompatActivity {
     TextView mLastMessage;
     ArrayList<CheckBox> mCheckboxes = new ArrayList<>();
     LinearLayout mLinearLayoutCheckboxes;
+    RadioButton mRadioGuide;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,8 +58,9 @@ public class PreferencesActivity extends AppCompatActivity {
         mLinearLayoutCheckboxes = (LinearLayout) findViewById(R.id.listview_checkboxes);
         mScrollViewMain = (ScrollView) findViewById(R.id.scrollViewMain);
         mLastMessage = (TextView) findViewById(R.id.lastMessageTextView);
+        mRadioGuide = (RadioButton) findViewById(R.id.radioGuide);
 
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        final AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if(accessToken==null || accessToken.isExpired()){
             mGreetingText.setText("Log in not functioning properly. PLease restart the app");
         }
@@ -69,8 +73,30 @@ public class PreferencesActivity extends AppCompatActivity {
         mButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                PreferencePacket prefs = new PreferencePacket();
+                prefs.token = accessToken.getToken();
+                prefs.usertype = mRadioGuide.isChecked()?1:0;
+                if (prefs.usertype == 0){
+                    Date date1= (Date) new Date
+                        (mDatePicker.getYear(), mDatePicker.getMonth(), mDatePicker.getDayOfMonth());
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    String dateString = sdf.format(date1);
+                    prefs.date = dateString;
+                }
+                else{
+                    ///guide section
+                }
+                //prefs.likes.add();
+
+                for ( int i=0; i < mLinearLayoutCheckboxes.getChildCount(); i++) {
+                    CheckBox cb = (CheckBox) mLinearLayoutCheckboxes.getChildAt(i);
+                    if (cb.isChecked()){
+                        prefs.addDay(1<<i);
+                    }
+                }
                 Toast.makeText(PreferencesActivity.this, "Button CLicked", Toast.LENGTH_SHORT).show();
-                new ServerComm().execute("NUll");
+
+                new ServerComm().execute(prefs.getJSON());
                 /*Intent startChatApplicationIntent = new Intent(PreferencesActivity.this,ChatActivity.class);
 
                 startActivity(startChatApplicationIntent);*/
@@ -170,7 +196,7 @@ public class PreferencesActivity extends AppCompatActivity {
 
                 //publishProgress("IO ready for transmission \n");
 
-                out.println("Greetings from Adam");
+                out.println(params[0]);
 
                // publishProgress("Message sent, waiting for response");
 
