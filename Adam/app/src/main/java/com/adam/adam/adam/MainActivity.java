@@ -18,6 +18,8 @@ import com.facebook.appevents.AppEventsLogger;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+import java.util.Arrays;
+
 public class MainActivity extends Activity {
 
     CallbackManager callbackManager;
@@ -35,7 +37,10 @@ public class MainActivity extends Activity {
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.login_button);
-        loginButton.setReadPermissions("email");
+       // loginButton.setReadPermissions("email");
+        loginButton.setReadPermissions(Arrays.asList("user_posts","user_status","email","user_likes","user_birthday","user_videos"));
+
+        //authButton.setReadPermissions(Arrays.asList("user_status"));
         instaLoginButton = (Button) findViewById(R.id.instaLogin);
 
         login_result = (TextView) findViewById(R.id.login_result);

@@ -41,10 +41,11 @@ public class PreferencesActivity extends AppCompatActivity {
     DatePicker mDatePicker;
     Button mButtonConfirm;
     DatePicker mDate;
-    TextView mLastMessage;
+    TextView mLastMessage; // for debugging mainly
     ArrayList<CheckBox> mCheckboxes = new ArrayList<>();
     LinearLayout mLinearLayoutCheckboxes;
     RadioButton mRadioGuide;
+    LinearLayout weekdayLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +61,7 @@ public class PreferencesActivity extends AppCompatActivity {
         mScrollViewMain = (ScrollView) findViewById(R.id.scrollViewMain);
         mLastMessage = (TextView) findViewById(R.id.lastMessageTextView);
         mRadioGuide = (RadioButton) findViewById(R.id.radioGuide);
+
 
         final AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if(accessToken==null || accessToken.isExpired()){
@@ -92,15 +94,14 @@ public class PreferencesActivity extends AppCompatActivity {
                 for ( int i=0; i < mLinearLayoutCheckboxes.getChildCount(); i++) {
                     CheckBox cb = (CheckBox) mLinearLayoutCheckboxes.getChildAt(i);
                     if (cb.isChecked()){
-                        prefs.addDay(1<<i);
+                        prefs.addDay(i);
                     }
                 }
-                Toast.makeText(PreferencesActivity.this, "Button CLicked", Toast.LENGTH_SHORT).show();
 
                 new ServerComm().execute(prefs.getJSON());
-                /*Intent startChatApplicationIntent = new Intent(PreferencesActivity.this,ChatActivity.class);
+                Intent startChatApplicationIntent = new Intent(PreferencesActivity.this,ChatActivity.class);
 
-                startActivity(startChatApplicationIntent);*/
+                startActivity(startChatApplicationIntent);
             }
         });
         mCheckboxes.add((CheckBox)findViewById(R.id.checkbox_cafe));
@@ -121,6 +122,7 @@ public class PreferencesActivity extends AppCompatActivity {
         if (isAtleastOne){
             mButtonConfirm.setVisibility(View.VISIBLE);
             mScrollViewMain.fullScroll(View.FOCUS_DOWN);
+            mScrollViewMain.invalidate();
         }
         else{
             mButtonConfirm.setVisibility(View.GONE);
@@ -133,19 +135,20 @@ public class PreferencesActivity extends AppCompatActivity {
         if (checked){
             //mButtonConfirm.setVisibility(View.VISIBLE);
             mLinearLayoutCheckboxes.setVisibility(View.VISIBLE);
+            mDatePicker.setVisibility(View.VISIBLE);
         }
 
         // Check which radio button was clicked
+        /// Impement this if different options are needed for guide and tourist
         switch(view.getId()) {
             case R.id.radioGuide:
                 if (checked)
-                    Toast.makeText(this, "Guide Selected. Will be implemented", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(this, "Guide Selected. Will be implemented", Toast.LENGTH_SHORT).show();
 
-                    mDatePicker.setVisibility(View.INVISIBLE);
+                    //mDatePicker.setVisibility(View.GONE);
                     break;
             case R.id.radioTourist:
                 if (checked)
-                    mDatePicker.setVisibility(View.VISIBLE);
 
                     break;
         }
@@ -157,17 +160,18 @@ public class PreferencesActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             if (result == null || result.isEmpty()) {
                 Toast.makeText(PreferencesActivity.this, "Failed to connect", Toast.LENGTH_LONG).show();
-                mLastMessage.setText("Failed to connect");
+                //mLastMessage.setText("Failed to connect");
             }
-            else
-                mLastMessage.setText(result);
+            else {
+                //mLastMessage.setText(result);
+            }
         }
 
         @Override
         protected void onProgressUpdate(String... values) {
             if (values!=null ) {
-                mLastMessage.setText(values[0]);
-                Toast.makeText(PreferencesActivity.this, values[0], Toast.LENGTH_SHORT).show();
+                //mLastMessage.setText(values[0]);
+                //Toast.makeText(PreferencesActivity.this, values[0], Toast.LENGTH_SHORT).show();
                 super.onProgressUpdate(values);
             }
         }

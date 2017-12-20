@@ -2,12 +2,11 @@ package com.adam.adam.adam;
 
 import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * Created by Hesiris on 20/12/2017.
@@ -18,28 +17,30 @@ public class PreferencePacket {
     //type: 0 for tourist 1 for guide
     public int usertype;
     String date;
-    int goodDays;
-    public ArrayList<String> likes;
+    String likes;
 
-    public PreferencePacket()
-    {
-        this.likes = new ArrayList<String>();
+    public PreferencePacket() {
+        likes = "00000";
     }
-
-    public PreferencePacket(String token, int usertype, String date,int goodDays, ArrayList<String> likes) {
+    public PreferencePacket(String token, int usertype, String date,String goodDays, ArrayList<String> likes) {
         this.token = token;
         this.usertype = usertype;
         this.date = date;
-        this.goodDays = goodDays;
-        this.likes = likes;
+        this.likes = goodDays;
     }
 
     public void addDay(int day){
-        this.goodDays |= day;
+        //this.likes |= day;
+        char[] ca = this.likes.toCharArray();
+        ca[day] = '1';
+        this.likes = Arrays.toString(ca);
     }
     public void removeDay(int day){
-        if ( (this.goodDays & day) == 0)
-        this.goodDays ^= day;
+        //if ( (this.likes & day) == 0)
+        //this.likes ^= day;
+        char[] ca = this.likes.toCharArray();
+        ca[day] = '0';
+        this.likes = Arrays.toString(ca);
     }
 
     public String getJSON(){
@@ -48,12 +49,7 @@ public class PreferencePacket {
             prefJSON.put("token",token);
             prefJSON.put("usertype",usertype);
             prefJSON.put("date",date);
-            prefJSON.put("goodDays",goodDays);
-            JSONArray jsonArr = new JSONArray();
-            for (String like : likes){
-                jsonArr.put(like);
-            }
-            prefJSON.put("likes",jsonArr);
+            prefJSON.put("likes", likes);
         } catch (JSONException e) {
             Log.e("JSON","Failed to parse",e);
         }
