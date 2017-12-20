@@ -47,6 +47,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:onClick="onRadioButtonClicked"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:text="Tourist"
                     tools:layout_editor_absoluteX="138dp"
                     tools:layout_editor_absoluteY="77dp" />
@@ -55,6 +57,8 @@
                     android:id="@+id/radioGuide"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp"
                     android:layout_gravity="center_vertical"
                     android:onClick="onRadioButtonClicked"
                     android:text="Guide"
@@ -131,6 +135,12 @@
                 android:layout_height="wrap_content"
                 android:text="Confirm"
                 android:visibility="gone" />
+            <TextView
+                android:id="@+id/lastMessageTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                />
         </LinearLayout>
 
     </ScrollView>

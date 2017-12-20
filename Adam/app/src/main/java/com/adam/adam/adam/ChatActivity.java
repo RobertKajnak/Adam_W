@@ -20,7 +20,7 @@ public class ChatActivity extends AppCompatActivity {
     private ListView listView;
     private EditText chatText;
     private Button buttonSend;
-    private boolean side = false;
+    private boolean side = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

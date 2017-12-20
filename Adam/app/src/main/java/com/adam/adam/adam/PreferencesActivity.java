@@ -1,6 +1,7 @@
 package com.adam.adam.adam;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,16 +18,27 @@ import com.facebook.AccessToken;
 
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class PreferencesActivity extends AppCompatActivity {
+
+    final String SERVERIP="10.0.2.2";
+    final int SERVERPORT = 23260;
 
     ScrollView mScrollViewMain;
     TextView mGreetingText;
     DatePicker mDatePicker;
     Button mButtonConfirm;
     DatePicker mDate;
+    TextView mLastMessage;
     ArrayList<CheckBox> mCheckboxes = new ArrayList<>();
     LinearLayout mLinearLayoutCheckboxes;
     @Override
@@ -42,6 +54,7 @@ public class PreferencesActivity extends AppCompatActivity {
         mButtonConfirm = (Button) findViewById(R.id.button_confirm);
         mLinearLayoutCheckboxes = (LinearLayout) findViewById(R.id.listview_checkboxes);
         mScrollViewMain = (ScrollView) findViewById(R.id.scrollViewMain);
+        mLastMessage = (TextView) findViewById(R.id.lastMessageTextView);
 
         AccessToken accessToken = AccessToken.getCurrentAccessToken();
         if(accessToken==null || accessToken.isExpired()){
@@ -56,9 +69,11 @@ public class PreferencesActivity extends AppCompatActivity {
         mButtonConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent startChatApplicationIntent = new Intent(PreferencesActivity.this,ChatActivity.class);
+                Toast.makeText(PreferencesActivity.this, "Button CLicked", Toast.LENGTH_SHORT).show();
+                new ServerComm().execute("NUll");
+                /*Intent startChatApplicationIntent = new Intent(PreferencesActivity.this,ChatActivity.class);
 
-                startActivity(startChatApplicationIntent);
+                startActivity(startChatApplicationIntent);*/
             }
         });
         mCheckboxes.add((CheckBox)findViewById(R.id.checkbox_cafe));
@@ -108,4 +123,76 @@ public class PreferencesActivity extends AppCompatActivity {
                     break;
         }
     }
+
+    public class ServerComm extends AsyncTask<String,String,String> {
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result == null || result.isEmpty()) {
+                Toast.makeText(PreferencesActivity.this, "Failed to connect", Toast.LENGTH_LONG).show();
+                mLastMessage.setText("Failed to connect");
+            }
+            else
+                mLastMessage.setText(result);
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            if (values!=null ) {
+                mLastMessage.setText(values[0]);
+                Toast.makeText(PreferencesActivity.this, values[0], Toast.LENGTH_SHORT).show();
+                super.onProgressUpdate(values);
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+            String msg = "";
+            Socket socket = null;
+            publishProgress("Attempting to establish conenction");
+
+            try {
+                try {
+                    //socket = new Socket("176.63.17.182", 12034);
+                    socket = new Socket(SERVERIP,SERVERPORT);
+                    //socket = new Socket();
+                }catch (Exception e){
+                    return "Connection Failed: " + e.getMessage();
+                }
+                //publishProgress("Socket created \n");
+
+
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(
+                        socket.getInputStream()));
+                PrintWriter out = new PrintWriter(new BufferedWriter(
+                        new OutputStreamWriter(socket.getOutputStream())), true);
+
+                //publishProgress("IO ready for transmission \n");
+
+                out.println("Greetings from Adam");
+
+               // publishProgress("Message sent, waiting for response");
+
+                msg= in.readLine();
+                /*while (!msg.equals("END")){
+                    studentList.add(Student.deserialize(msg));
+                    msg= in.readLine();
+                }*/
+
+
+                in.close();
+                out.close();
+                socket.close();
+                //publishProgress("Connection closed.");
+                return msg;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+    }
+
 }
